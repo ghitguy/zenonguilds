@@ -1,0 +1,21 @@
+guilds:
+  mining:
+    leader:
+    level: 1
+    members:
+  alchemy:
+    leader:
+    level: 1
+    members:
+  blacksmith:
+    leader:
+    level: 1
+    members:
+  mercenary:
+    leader:
+    level: 1
+    members:
+  farming:
+    leader:
+    level: 1
+    members:

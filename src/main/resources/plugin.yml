@@ -1,0 +1,12 @@
+name: ZenonGuilds
+version: ${project.version}
+main: me.ghit.zenonguilds.ZenonGuilds
+api-version: 1.15
+authors: [ghit]
+description: Guilds plugin for the Zenon server
+depend: [Vault]
+commands:
+  guild:
+    aliases: [guilds]
+    description: Something
+    usage: /<command>

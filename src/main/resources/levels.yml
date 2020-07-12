@@ -1,0 +1,42 @@
+user-levels:
+  1:
+    cost: 200
+    name: "&6Test"
+  2:
+    cost: 300
+    name: "&6Test"
+  3:
+    cost: 400
+    name: "&6Test"
+  4:
+    cost: 500
+    name: "&6Test"
+  5:
+    cost: 600
+    name: "&6Test"
+  6:
+    cost: 700
+    name: "&6Test"
+  7:
+    cost: 800
+    name: "&6Test"
+  8:
+    cost: 900
+    name: "&6Test"
+  9:
+    cost: 1000
+    name: "&6Test"
+  10:
+    cost: 1100
+    name: "&6Test"
+guild-levels:
+  1: 2000
+  2: 3000
+  3: 4000
+  4: 5000
+  5: 6000
+  6: 7000
+  7: 8000
+  8: 9000
+  9: 10000
+  10: 11000

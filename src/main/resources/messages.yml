@@ -1,0 +1,14 @@
+errorPrefix: "&c&lERROR"
+successPrefix: "&a&lSUCCESS"
+
+tooFewArgs: "&7You have entered too few arguments!"
+offlineOrNotAPlayer: "&7That player is offline or invalid!"
+noPermission: "%error% &cYou do not have permission to use that command!"
+invalidGuild: "&cYou have entered an invalid guild, valid guilds; Mining, Alchemy, Blacksmith, Mercenary, Farming"
+invalidNumber: "%error% &7You have entered an invalid number"
+notInGuild: "%error% &7Player: %player% is not in a guild"
+playerNotInGuild: "Player: %player% is not in a guild"
+
+setGuild: "%success% &7Player: %player%'s guild was set to %guild%"
+setLevel: "%success% &7Player: %player%'s level was set to %level%"
+setLeader: "%success% &7Player: %player% is now the leader of the %guild% guild"
