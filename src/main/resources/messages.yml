@@ -8,7 +8,9 @@ invalidGuild: "&cYou have entered an invalid guild, valid guilds; Mining, Alchem
 invalidNumber: "%error% &7You have entered an invalid number"
 notInGuild: "%error% &7Player: %player% is not in a guild"
 playerNotInGuild: "Player: %player% is not in a guild"
+invalidBoolean: "&7Please enter a valid boolean!"
 
+removedLeader: "%success% &7Player: %player% removed from leader of %guild%"
 setGuild: "%success% &7Player: %player%'s guild was set to %guild%"
 setLevel: "%success% &7Player: %player%'s level was set to %level%"
 setLeader: "%success% &7Player: %player% is now the leader of the %guild% guild"

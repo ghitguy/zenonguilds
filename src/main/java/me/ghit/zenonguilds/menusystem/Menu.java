@@ -64,7 +64,7 @@ public abstract class Menu implements InventoryHolder {
         return item;
     }
 
-    public ItemStack renameItem(ItemStack itemStack, String displayName, String... lore) {
+    public static ItemStack renameItem(ItemStack itemStack, String displayName, String... lore) {
 
         ItemMeta itemMeta = itemStack.getItemMeta();
         itemMeta.setDisplayName(displayName);

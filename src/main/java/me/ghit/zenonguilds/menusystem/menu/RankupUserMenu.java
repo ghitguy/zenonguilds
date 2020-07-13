@@ -6,8 +6,10 @@ import me.ghit.zenonguilds.menusystem.Menu;
 import me.ghit.zenonguilds.menusystem.PlayerMenuUtility;
 import me.ghit.zenonguilds.utils.Chat;
 import me.ghit.zenonguilds.utils.GuildHandler;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;
@@ -15,14 +17,14 @@ import org.bukkit.inventory.ItemStack;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class RankupGuildMenu extends Menu {
-    public RankupGuildMenu(PlayerMenuUtility playerMenuUtility) {
+public class RankupUserMenu extends Menu {
+    public RankupUserMenu(PlayerMenuUtility playerMenuUtility) {
         super(playerMenuUtility);
     }
 
     @Override
     public String getMenuName() {
-        return "Guild Levelling";
+        return "Levels";
     }
 
     @Override
@@ -39,32 +41,33 @@ public class RankupGuildMenu extends Menu {
         if (!currentItem.hasItemMeta()) return;
         if (!currentItem.getItemMeta().hasDisplayName()) return;
         if (currentItem.getItemMeta().getDisplayName().equals(" ")) return;
-        int currentLevel = GuildHandler.getGuildLevel(GuildHandler.getGuild(playerMenuUtility.getOwner()));
+        int currentLevel = GuildHandler.getUserLevel(playerMenuUtility.getOwner());
 
         // Locked Level
         if (currentItem.getItemMeta().getDisplayName().startsWith(Chat.toColor("&8Level"))) {
             int levelClicked = Integer.parseInt(currentItem.getItemMeta().getDisplayName().replace(Chat.toColor("&8Level: "), ""));
             if (levelClicked != currentLevel + 1) {
-                player.sendMessage(Chat.toColor("&cYou are not able to rank up to that level!"));
+                player.sendMessage(Chat.toColor("&cYou are not able to level up to that level!"));
             } else { // Is the next level up
                 // money requirement
-                int requirement = ZenonGuilds.getLevelRequirements().getInt("guild-levels." + (currentLevel+1));
+                int requirement = ZenonGuilds.getLevelRequirements().getInt("user-levels." + (currentLevel+1) + ".cost");
+                System.out.println(requirement);
 
                 if (ZenonGuilds.getEconomy().getBalance(player) >= requirement) {
                     // Has more than or equal to the right amount of money
-                    ZenonGuilds.getEconomy().withdrawPlayer(player, -requirement);
+                    ZenonGuilds.getEconomy().withdrawPlayer(player, requirement);
 
-                    GuildHandler.setGuildLevel(GuildHandler.getGuild(player), currentLevel + 1);
+                    GuildHandler.setUserLevel(player, currentLevel + 1);
                     currentLevel += 1;
-                    player.sendMessage(Chat.toColor("&aYou ranked the guild up to " + (currentLevel + 1)));
-                    inventory.setItem(event.getSlot(), makeItem(Material.HONEYCOMB, Chat.toColor("&7Level: &d" + currentLevel)));
+                    player.sendMessage(Chat.toColor("&aYou levelled up to " + currentLevel));
+                    inventory.setItem(event.getSlot(), makeItem(Material.BUBBLE_CORAL, Chat.toColor("&7Level: &d" + currentLevel)));
                 } else { // Don't have enough money
-                    player.sendMessage(Chat.toColor("&cYou do not have enough money to rank up the guild, requirement to level up to " + (currentLevel + 1) + ": &a$" + requirement));
+                    player.sendMessage(Chat.toColor("&cYou do not have enough money to rank up, requirement to level up to " + (currentLevel + 1) + ": &a$" + requirement));
                 }
             }
         } else if (ChatColor.stripColor(currentItem.getItemMeta().getDisplayName()).equals("Return")) {
             player.closeInventory();
-            new GuildControlPanel(ZenonGuilds.getPlayerMenuUtility(player)).open();
+            new GuildMenu(playerMenuUtility).open();
         }
     }
 
@@ -72,15 +75,15 @@ public class RankupGuildMenu extends Menu {
     public void setMenuItems() {
         setFillerGlass();
         int availableLevel = 1;
-        int currentLevel = GuildHandler.getGuildLevel(GuildHandler.getGuild(playerMenuUtility.getOwner()));
+        int currentLevel = GuildHandler.getUserLevel(playerMenuUtility.getOwner());
 
         ArrayList<Integer> levelSlots = new ArrayList<>(Arrays.asList(11, 12, 13, 14, 15, 20, 21, 22, 23, 24));
 
         for (int i : levelSlots) {
             if (availableLevel <= currentLevel) {
-                inventory.setItem(i, makeItem(Material.HONEYCOMB, Chat.toColor("&7Level: &d" + availableLevel)));
+                inventory.setItem(i, makeItem(Material.BUBBLE_CORAL, Chat.toColor("&7Level: &d" + availableLevel)));
             } else {
-                inventory.setItem(i, makeItem(Material.DEAD_TUBE_CORAL, Chat.toColor("&8Level: " + availableLevel)));
+                inventory.setItem(i, makeItem(Material.DEAD_BUBBLE_CORAL, Chat.toColor("&8Level: " + availableLevel)));
             }
             availableLevel += 1;
         }

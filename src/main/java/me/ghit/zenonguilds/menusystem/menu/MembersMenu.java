@@ -21,7 +21,7 @@ public class MembersMenu extends PaginatedMenu {
 
     @Override
     public String getMenuName() {
-        return TextUtil.convertToPascal(GuildHandler.getGuild(playerMenuUtility.getOwner())) + " Members";
+        return TextUtil.convertToPascal(GuildHandler.getGuild(playerMenuUtility.getOwner())) + " Guild Members";
     }
 
     @Override

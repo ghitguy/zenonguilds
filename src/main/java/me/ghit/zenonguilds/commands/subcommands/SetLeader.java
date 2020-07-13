@@ -1,12 +1,15 @@
 package me.ghit.zenonguilds.commands.subcommands;
 
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import me.ghit.zenonguilds.commands.SubCommand;
 import me.ghit.zenonguilds.utils.GuildHandler;
 import me.ghit.zenonguilds.utils.Messages;
+import org.apache.commons.lang.BooleanUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class SetLeader extends SubCommand {
@@ -32,7 +35,7 @@ public class SetLeader extends SubCommand {
             return;
         }
 
-        if (args.length <= 1) {
+        if (args.length <= 2) {
             player.sendMessage(Messages.tooFewArgs);
             return;
         }
@@ -49,10 +52,22 @@ public class SetLeader extends SubCommand {
             return;
         }
 
-        GuildHandler.setLeader(mentionedPlayer);
-        player.sendMessage(Messages.setLeader.replaceAll("%player%", mentionedPlayer.getName())
-                .replaceAll("%guild%", GuildHandler.getGuild(mentionedPlayer))
-                .replaceAll("%player%", mentionedPlayer.getName()));
+        if (!args[2].toLowerCase().equals("true") && !args[2].toLowerCase().equals("false")) {
+            player.sendMessage(Messages.invalidBoolean);
+            return;
+        }
+
+        if (args[2].toLowerCase().equals("true")) {
+            GuildHandler.setLeader(mentionedPlayer);
+            player.sendMessage(Messages.setLeader.replaceAll("%player%", mentionedPlayer.getName())
+                    .replaceAll("%guild%", GuildHandler.getGuild(mentionedPlayer))
+                    .replaceAll("%player%", mentionedPlayer.getName()));
+        } else {
+            GuildHandler.removeLeader(mentionedPlayer);
+            player.sendMessage(Messages.removedLeader.replaceAll("%player%", mentionedPlayer.getName())
+                    .replaceAll("%guild%", GuildHandler.getGuild(mentionedPlayer))
+                    .replaceAll("%player%", mentionedPlayer.getName()));
+        }
     }
 
     @Override
@@ -65,6 +80,8 @@ public class SetLeader extends SubCommand {
                 playerNames.add(value.getName());
             }
             return playerNames;
+        } else if (args.length == 3) {
+            return Arrays.asList("true", "false");
         }
 
         return null;

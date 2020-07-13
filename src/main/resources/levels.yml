@@ -1,36 +1,34 @@
 user-levels:
   1:
-    cost: 200
-    name: "&6Test"
+    command: pex user %player% prefix "&atest "
   2:
     cost: 300
-    name: "&6Test"
+    command: pex user %player% prefix "&1test "
   3:
     cost: 400
-    name: "&6Test"
+    command: pex user %player% prefix "&2test "
   4:
     cost: 500
-    name: "&6Test"
+    command: pex user %player% prefix "&3test "
   5:
     cost: 600
-    name: "&6Test"
+    command: pex user %player% prefix "&4test "
   6:
     cost: 700
-    name: "&6Test"
+    command: pex user %player% prefix "&5test "
   7:
     cost: 800
-    name: "&6Test"
+    command: pex user %player% prefix "&6test "
   8:
     cost: 900
-    name: "&6Test"
+    command: pex user %player% prefix "&7test "
   9:
     cost: 1000
-    name: "&6Test"
+    command: pex user %player% prefix "&8test "
   10:
     cost: 1100
-    name: "&6Test"
+    command: pex user %player% prefix "&9test "
 guild-levels:
-  1: 2000
   2: 3000
   3: 4000
   4: 5000

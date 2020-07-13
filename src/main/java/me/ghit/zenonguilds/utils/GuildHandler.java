@@ -2,6 +2,7 @@ package me.ghit.zenonguilds.utils;
 
 import dev.dbassett.skullcreator.SkullCreator;
 import me.ghit.zenonguilds.ZenonGuilds;
+import me.ghit.zenonguilds.menusystem.Menu;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.configuration.ConfigurationSection;
@@ -48,6 +49,18 @@ public class GuildHandler {
         return guild;
     }
 
+    public static String getGuild(OfflinePlayer player) {
+        ConfigurationSection guildSection = guilds.getConfigurationSection("guilds");
+        String guild = "";
+
+        for (String _guild : guildSection.getKeys(false)) {
+            if (guilds.getStringList("guilds." + _guild + ".members").stream().anyMatch(key -> key.startsWith(player.getUniqueId().toString())))
+                guild = _guild;
+        }
+
+        return guild;
+    }
+
     public static void removeFromGuild(Player player) {
         List<String> members = guilds.getStringList("guilds." + getGuild(player) + ".members");
         members.removeIf(member -> member.startsWith(player.getUniqueId().toString()));
@@ -71,7 +84,13 @@ public class GuildHandler {
      */
     public static ArrayList<ItemStack> getMemberHeads(String guild) {
         ArrayList<ItemStack> memberHeads = new ArrayList<>();
-        getMembers(guild).forEach(member -> memberHeads.add(SkullCreator.itemFromUuid(member)));
+        getMembers(guild).forEach(member -> {
+            if (GuildHandler.isLeader(Bukkit.getOfflinePlayer(member))) {
+                memberHeads.add(Menu.renameItem(SkullCreator.itemFromUuid(member), Chat.toColor("&d" + Bukkit.getOfflinePlayer(member).getName()), Chat.toColor("&6&lLEADER")));
+            } else {
+                memberHeads.add(Menu.renameItem(SkullCreator.itemFromUuid(member), Chat.toColor("&d" + Bukkit.getOfflinePlayer(member).getName()), Chat.toColor("&7Level: " + getUserLevel(Bukkit.getOfflinePlayer(member)))));
+            }
+        });
         return memberHeads;
     }
 
@@ -125,6 +144,18 @@ public class GuildHandler {
         return -1;
     }
 
+    public static int getUserLevel(OfflinePlayer player) {
+        List<String> members = guilds.getStringList("guilds." + getGuild(player) + ".members");
+
+        for (int i = 0; i < members.size(); i++) {
+            if (members.get(i).startsWith(player.getUniqueId().toString())) {
+                return Integer.parseInt(UserSerializer.deserialize(members.get(i))[1]);
+            }
+        }
+
+        return -1;
+    }
+
     public static void setUserLevel(Player player, int level) {
         if (getGuild(player).equals("")) return;
 
@@ -141,18 +172,37 @@ public class GuildHandler {
             members.add(UserSerializer.serialize(player, level));
         }
 
+        Bukkit.dispatchCommand(Bukkit.getConsoleSender(), ZenonGuilds.getLevelRequirements().getString("user-levels." + level + ".command")
+                .replaceAll("%player%", player.getName()));
+        System.out.println("[ZENONGUILDS] Player: " + player.getName() + " current up to " + level);
         guilds.set("guilds." + getGuild(player) + ".members", members);
         ZenonGuilds.getGuilds().saveConfig();
     }
 
     public static void setLeader(Player player) {
-        guilds.set("guilds." + getGuild(player) + "" + ".leader", player.getUniqueId().toString());
+        guilds.set("guilds." + getGuild(player) + ".leader", player.getUniqueId().toString());
+        setUserLevel(player, 10);
         ZenonGuilds.getGuilds().saveConfig();
     }
 
     public static boolean isLeader(Player player) {
         if (getGuild(player).equals("")) return false;
+        if (!guilds.getConfigurationSection("guilds." + getGuild(player)).contains("leader")) return false;
 
         return guilds.getString("guilds." + getGuild(player) + ".leader").equals(player.getUniqueId().toString());
+    }
+
+    public static boolean isLeader(OfflinePlayer player) {
+        if (getGuild(player).equals("")) return false;
+        if (!guilds.getConfigurationSection("guilds." + getGuild(player)).contains("leader")) return false;
+
+        return guilds.getString("guilds." + getGuild(player) + ".leader").equals(player.getUniqueId().toString());
+    }
+
+    public static void removeLeader(Player player) {
+        if (!isLeader(player)) return;
+        guilds.set("guilds." + getGuild(player) + ".leader", "");
+        setUserLevel(player, 1);
+        ZenonGuilds.getGuilds().saveConfig();
     }
 }
