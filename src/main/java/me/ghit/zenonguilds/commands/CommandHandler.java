@@ -1,9 +1,7 @@
 package me.ghit.zenonguilds.commands;
 
 import me.ghit.zenonguilds.ZenonGuilds;
-import me.ghit.zenonguilds.commands.subcommands.SetGuild;
-import me.ghit.zenonguilds.commands.subcommands.SetLeader;
-import me.ghit.zenonguilds.commands.subcommands.SetLevel;
+import me.ghit.zenonguilds.commands.subcommands.*;
 import me.ghit.zenonguilds.menusystem.menu.GuildControlPanel;
 import me.ghit.zenonguilds.menusystem.menu.GuildMenu;
 import me.ghit.zenonguilds.menusystem.menu.GuildSelectMenu;
@@ -25,6 +23,9 @@ public class CommandHandler implements CommandExecutor, TabExecutor {
         subcommands.add(new SetGuild());
         subcommands.add(new SetLevel());
         subcommands.add(new SetLeader());
+        subcommands.add(new SetGuildLevel());
+        subcommands.add(new UserInfo());
+        subcommands.add(new GuildInfo());
     }
 
     @Override

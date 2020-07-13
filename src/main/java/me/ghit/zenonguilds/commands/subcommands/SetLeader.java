@@ -25,12 +25,12 @@ public class SetLeader extends SubCommand {
 
     @Override
     public String getSyntax() {
-        return "/guild setleader <player> <guild>";
+        return "/guild setleader <player> <true|false>";
     }
 
     @Override
     public void perform(Player player, String[] args) {
-        if (!player.hasPermission("guilds.setLeader") || !player.hasPermission("guilds.*")) {
+        if (!player.hasPermission("guilds.setleader") || !player.hasPermission("guilds.*")) {
             player.sendMessage(Messages.noPermission);
             return;
         }

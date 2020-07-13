@@ -5,10 +5,10 @@ import org.bukkit.configuration.file.FileConfiguration;
 
 public class Messages {
 
-    private static FileConfiguration messages = ZenonGuilds.getMessages();
+    private static final FileConfiguration messages = ZenonGuilds.getMessages();
 
-    private static String errorPrefix = Chat.toColor(messages.getString("errorPrefix"));
-    private static String successPrefix = Chat.toColor(messages.getString("successPrefix"));
+    private static final String errorPrefix = Chat.toColor(messages.getString("errorPrefix"));
+    private static final String successPrefix = Chat.toColor(messages.getString("successPrefix"));
 
     public static String tooFewArgs = errorPrefix + " " + Chat.toColor(messages.getString("tooFewArgs"));
     public static String offlineOrNotAPlayer = errorPrefix + " " + Chat.toColor(messages.getString("offlineOrNotAPlayer"));
@@ -23,4 +23,5 @@ public class Messages {
     public static String setGuild = Chat.toColor(messages.getString("setGuild")).replaceAll("%success%", successPrefix);
     public static String setLevel = Chat.toColor(messages.getString("setLevel")).replaceAll("%success%", successPrefix);
     public static String setLeader = Chat.toColor(messages.getString("setLeader")).replaceAll("%success%", successPrefix);
+    public static String setGuildLevel = Chat.toColor(messages.getString("setGuildLevel")).replaceAll("%success%", successPrefix);
 }

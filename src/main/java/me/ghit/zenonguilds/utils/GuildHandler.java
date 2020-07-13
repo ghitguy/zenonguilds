@@ -14,7 +14,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 public class GuildHandler {
 
@@ -204,5 +203,17 @@ public class GuildHandler {
         guilds.set("guilds." + getGuild(player) + ".leader", "");
         setUserLevel(player, 1);
         ZenonGuilds.getGuilds().saveConfig();
+    }
+
+    public static ArrayList<String> getMemberNames(String guild) {
+        ArrayList<String> memberNames = new ArrayList<>();
+        getMembers(guild).forEach(member -> memberNames.add(Bukkit.getOfflinePlayer(member).getName()));
+        return memberNames;
+    }
+
+    public static ArrayList<String> getOnlineMemberNames(String guild) {
+        ArrayList<String> onlineMemberNames = new ArrayList<>();
+        getOnlineMembers(guild).forEach(member -> onlineMemberNames.add(member.getName()));
+        return onlineMemberNames;
     }
 }
