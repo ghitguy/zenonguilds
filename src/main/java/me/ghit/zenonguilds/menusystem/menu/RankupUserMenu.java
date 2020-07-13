@@ -48,19 +48,18 @@ public class RankupUserMenu extends Menu {
                 player.sendMessage(Chat.toColor("&cYou are not able to level up to that level!"));
             } else { // Is the next level up
                 // money requirement
-                int requirement = ZenonGuilds.getLevelRequirements().getInt("user-levels." + (currentLevel+1) + ".cost");
-                System.out.println(requirement);
+                int requirement = ZenonGuilds.getLevelRequirements().getInt("user-levels." + (currentLevel + 1) + ".cost");
 
                 if (ZenonGuilds.getEconomy().getBalance(player) >= requirement) {
                     // Has more than or equal to the right amount of money
                     ZenonGuilds.getEconomy().withdrawPlayer(player, requirement);
 
-                    GuildHandler.setUserLevel(player, currentLevel + 1);
                     currentLevel += 1;
+                    GuildHandler.setUserLevel(player, currentLevel);
                     player.sendMessage(Chat.toColor("&aYou levelled up to " + currentLevel));
                     inventory.setItem(event.getSlot(), makeItem(Material.BUBBLE_CORAL, Chat.toColor("&7Level: &d" + currentLevel)));
                 } else { // Don't have enough money
-                    player.sendMessage(Chat.toColor("&cYou do not have enough money to rank up, requirement to level up to " + (currentLevel + 1) + ": &a$" + requirement));
+                    player.sendMessage(Chat.toColor("&cYou do not have enough money to rank up, requirement to level up to " + currentLevel + ": &a$" + requirement));
                 }
             }
         } else if (ChatColor.stripColor(currentItem.getItemMeta().getDisplayName()).equals("Return")) {
