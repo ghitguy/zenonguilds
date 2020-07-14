@@ -5,6 +5,7 @@ api-version: 1.15
 authors: [ghit]
 description: Guilds plugin for the Zenon server
 depend: [Vault]
+softdepend: [PlaceholderAPI]
 commands:
   guild:
     aliases: [guilds]

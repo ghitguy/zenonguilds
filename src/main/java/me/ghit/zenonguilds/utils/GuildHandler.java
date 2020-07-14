@@ -216,4 +216,8 @@ public class GuildHandler {
         getOnlineMembers(guild).forEach(member -> onlineMemberNames.add(member.getName()));
         return onlineMemberNames;
     }
+
+    public static OfflinePlayer getLeader(String guild) {
+        return Bukkit.getOfflinePlayer(UUID.fromString(guilds.getString("guilds." + guild + ".leader")));
+    }
 }

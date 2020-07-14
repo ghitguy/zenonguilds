@@ -4,7 +4,9 @@ import me.ghit.zenonguilds.commands.CommandHandler;
 import me.ghit.zenonguilds.listeners.MenuListener;
 import me.ghit.zenonguilds.menusystem.PlayerMenuUtility;
 import me.ghit.zenonguilds.utils.Config;
+import me.ghit.zenonguilds.utils.GuildPlaceholders;
 import net.milkbowl.vault.economy.Economy;
+import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.RegisteredServiceProvider;
@@ -28,6 +30,11 @@ public final class ZenonGuilds extends JavaPlugin {
             log.severe(String.format("[%s] - Disabled due to no Vault dependency found!", getDescription().getName()));
             getServer().getPluginManager().disablePlugin(this);
             return;
+        }
+
+        // Small check to make sure that PlaceholderAPI is installed
+        if(Bukkit.getPluginManager().getPlugin("PlaceholderAPI") != null){
+            new GuildPlaceholders(this).register();
         }
 
         guilds = new Config(this, "guilds.yml");
