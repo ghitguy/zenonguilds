@@ -6,6 +6,7 @@ import me.ghit.zenonguilds.menusystem.Menu;
 import me.ghit.zenonguilds.menusystem.PlayerMenuUtility;
 import me.ghit.zenonguilds.utils.Chat;
 import me.ghit.zenonguilds.utils.GuildHandler;
+import me.ghit.zenonguilds.utils.Messages;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -49,6 +50,11 @@ public class RankupUserMenu extends Menu {
             } else { // Is the next level up
                 // money requirement
                 int requirement = ZenonGuilds.getLevelRequirements().getInt("user-levels." + (currentLevel + 1) + ".cost");
+
+                if ((currentLevel + 1) == 10) {
+                    player.sendMessage(Messages.lockedLevel);
+                    return;
+                }
 
                 if (ZenonGuilds.getEconomy().getBalance(player) >= requirement) {
                     // Has more than or equal to the right amount of money

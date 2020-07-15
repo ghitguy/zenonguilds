@@ -18,6 +18,7 @@ public class Messages {
     public static String notInGuild = Chat.toColor(messages.getString("notInGuild")).replaceAll("%error%", errorPrefix);
     public static String playerNotInGuild = Chat.toColor(messages.getString("playerNotInGuild"));
     public static String invalidBoolean = errorPrefix + " " + Chat.toColor(messages.getString("invalidBoolean"));
+    public static String lockedLevel = Chat.toColor(messages.getString("lockedLevel").replaceAll("%error%", errorPrefix));
 
     public static String removedLeader = Chat.toColor(messages.getString("removedLeader")).replaceAll("%success%", successPrefix);
     public static String setGuild = Chat.toColor(messages.getString("setGuild")).replaceAll("%success%", successPrefix);
