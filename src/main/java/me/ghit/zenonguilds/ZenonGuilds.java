@@ -22,6 +22,7 @@ public final class ZenonGuilds extends JavaPlugin {
     private static Config guilds;
     private static Config messages;
     private static Config levels;
+    private static Config config;
     private static Economy econ = null;
 
     @Override
@@ -40,6 +41,7 @@ public final class ZenonGuilds extends JavaPlugin {
         guilds = new Config(this, "guilds.yml");
         levels = new Config(this, "levels.yml");
         messages = new Config(this, "messages.yml");
+        config = new Config(this, "config.yml");
         getCommand("guild").setExecutor(new CommandHandler());
         getServer().getPluginManager().registerEvents(new MenuListener(), this);
     }
@@ -70,6 +72,9 @@ public final class ZenonGuilds extends JavaPlugin {
 
     public static Config getGuilds() {
         return guilds;
+    }
+    public static Config getConfiguration() {
+        return config;
     }
     public static FileConfiguration getMessages() {
         return messages.getConfig();
