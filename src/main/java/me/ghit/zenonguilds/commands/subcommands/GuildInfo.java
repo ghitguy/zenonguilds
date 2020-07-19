@@ -2,13 +2,11 @@ package me.ghit.zenonguilds.commands.subcommands;
 
 import me.ghit.zenonguilds.commands.SubCommand;
 import me.ghit.zenonguilds.utils.Chat;
-import me.ghit.zenonguilds.utils.GuildHandler;
+import me.ghit.zenonguilds.handlers.GuildHandler;
 import me.ghit.zenonguilds.utils.Messages;
-import me.ghit.zenonguilds.utils.TextUtil;
-import org.bukkit.Bukkit;
+import me.ghit.zenonguilds.utils.TextUtils;
 import org.bukkit.entity.Player;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class GuildInfo extends SubCommand {
@@ -30,7 +28,7 @@ public class GuildInfo extends SubCommand {
 
     @Override
     public void perform(Player player, String[] args) {
-        if (!player.hasPermission("guilds.userinfo") || !player.hasPermission("guilds.*")) {
+        if (!player.hasPermission("guilds.guildinfo") || !player.hasPermission("guilds.*")) {
             player.sendMessage(Messages.noPermission);
             return;
         }
@@ -40,8 +38,6 @@ public class GuildInfo extends SubCommand {
             return;
         }
 
-        System.out.println(args[1]);
-
         if (!GuildHandler.getGuilds().contains(args[1].toLowerCase())) {
             player.sendMessage(Messages.invalidGuild);
             return;
@@ -49,9 +45,9 @@ public class GuildInfo extends SubCommand {
 
         String guild = args[1].toLowerCase();
 
-        player.sendMessage(Chat.toColor("&6 " + TextUtil.convertToPascal(guild) + " &7Guild Information"));
+        player.sendMessage(Chat.toColor("&6 " + TextUtils.convertToPascal(guild) + " &7Guild Information"));
 
-        player.sendMessage(Chat.toColor("&7 - Guild: " + TextUtil.convertToPascal(guild)));
+        player.sendMessage(Chat.toColor("&7 - Guild: " + TextUtils.convertToPascal(guild)));
         player.sendMessage(Chat.toColor("&7   - Level: " + GuildHandler.getGuildLevel(guild)));
         player.sendMessage(Chat.toColor("&7   - Balance: " + GuildHandler.getTotalBalance(guild)));
         player.sendMessage(Chat.toColor("&7   - Members: " + GuildHandler.getMemberNames(guild)));

@@ -5,7 +5,7 @@ import me.ghit.zenonguilds.commands.subcommands.*;
 import me.ghit.zenonguilds.menusystem.menu.GuildControlPanel;
 import me.ghit.zenonguilds.menusystem.menu.GuildMenu;
 import me.ghit.zenonguilds.menusystem.menu.GuildSelectMenu;
-import me.ghit.zenonguilds.utils.GuildHandler;
+import me.ghit.zenonguilds.handlers.GuildHandler;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -26,6 +26,8 @@ public class CommandHandler implements CommandExecutor, TabExecutor {
         subcommands.add(new SetGuildLevel());
         subcommands.add(new UserInfo());
         subcommands.add(new GuildInfo());
+        subcommands.add(new SetBalance());
+        subcommands.add(new ResetStock());
     }
 
     @Override

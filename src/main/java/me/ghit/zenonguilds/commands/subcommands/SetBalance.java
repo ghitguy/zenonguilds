@@ -1,5 +1,6 @@
 package me.ghit.zenonguilds.commands.subcommands;
 
+import me.ghit.zenonguilds.ZenonGuilds;
 import me.ghit.zenonguilds.commands.SubCommand;
 import me.ghit.zenonguilds.handlers.GuildHandler;
 import me.ghit.zenonguilds.utils.Messages;
@@ -9,30 +10,33 @@ import org.bukkit.entity.Player;
 import java.util.Arrays;
 import java.util.List;
 
-public class SetGuildLevel extends SubCommand {
+public class SetBalance extends SubCommand {
+
+    private ZenonGuilds plugin = ZenonGuilds.getInstance();
+
     @Override
     public String getName() {
-        return "setguildlevel";
+        return "setbalance";
     }
 
     @Override
     public String getDescription() {
-        return "Sets a guild's level";
+        return "Sets the balance of a guild";
     }
 
     @Override
     public String getSyntax() {
-        return "/guild setguildlevel <guild> <level>";
+        return "/guild setbalance <guild> <amount>";
     }
 
     @Override
     public void perform(Player player, String[] args) {
-        if (!player.hasPermission("guilds.setguildlevel") || !player.hasPermission("guilds.*")) {
+        if (!player.hasPermission("guilds.setbalance") || !player.hasPermission("guilds.*")) {
             player.sendMessage(Messages.noPermission);
             return;
         }
 
-        if (args.length <= 2) {
+        if (args.length <= 1) {
             player.sendMessage(Messages.tooFewArgs);
             return;
         }
@@ -48,18 +52,20 @@ public class SetGuildLevel extends SubCommand {
         }
 
         String guild = args[1].toLowerCase();
-        int level = Integer.parseInt(args[2]);
+        int amount = Integer.parseInt(args[2]);
 
-        GuildHandler.setGuildLevel(guild, level);
-        player.sendMessage(Messages.setGuildLevel.replaceAll("%guild%", guild).replaceAll("%level%", String.valueOf(GuildHandler.getGuildLevel(guild))));
+        plugin.setBalance(guild, amount);
+        player.sendMessage(Messages.setBalance
+                .replaceAll("%guild%", guild)
+                .replaceAll("%balance%", String.valueOf(plugin.getBalance(guild))));
     }
 
     @Override
     public List<String> getSubcommandArguments(Player player, String[] args) {
-        if (args.length == 2){
+        if (args.length == 2) {
             return GuildHandler.getGuilds();
         } else if (args.length == 3) {
-            return Arrays.asList("1", "2", "3", "4", "5", "6", "7", "8", "9", "10");
+            return Arrays.asList("100", "500", "1000", "2500", "5000");
         }
 
         return null;

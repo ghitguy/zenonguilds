@@ -2,6 +2,7 @@ package me.ghit.zenonguilds.utils;
 
 import me.clip.placeholderapi.expansion.PlaceholderExpansion;
 import me.ghit.zenonguilds.ZenonGuilds;
+import me.ghit.zenonguilds.handlers.GuildHandler;
 import org.bukkit.entity.Player;
 
 public class GuildPlaceholders extends PlaceholderExpansion {
@@ -56,7 +57,7 @@ public class GuildPlaceholders extends PlaceholderExpansion {
 
         // %guilds_guild%
         if(identifier.equals("guild")){
-            return TextUtil.convertToPascal(GuildHandler.getGuild(player));
+            return TextUtils.convertToPascal(GuildHandler.getGuild(player));
         }
 
         // %guilds_guildlevel%

@@ -3,8 +3,8 @@ package me.ghit.zenonguilds.menusystem.menu;
 import me.ghit.zenonguilds.menusystem.Menu;
 import me.ghit.zenonguilds.menusystem.PlayerMenuUtility;
 import me.ghit.zenonguilds.utils.Chat;
-import me.ghit.zenonguilds.utils.GuildHandler;
-import me.ghit.zenonguilds.utils.TextUtil;
+import me.ghit.zenonguilds.handlers.GuildHandler;
+import me.ghit.zenonguilds.utils.TextUtils;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -18,7 +18,7 @@ public class ConfirmMenu extends Menu {
 
     @Override
     public String getMenuName() {
-        return "Confirm: Leave " + TextUtil.convertToPascal(GuildHandler.getGuild(playerMenuUtility.getOwner())) + " Guild?";
+        return "Confirm: Leave " + TextUtils.convertToPascal(GuildHandler.getGuild(playerMenuUtility.getOwner())) + " Guild?";
     }
 
     @Override

@@ -1,7 +1,6 @@
 package me.ghit.zenonguilds.listeners;
 
 import me.ghit.zenonguilds.menusystem.Menu;
-import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;

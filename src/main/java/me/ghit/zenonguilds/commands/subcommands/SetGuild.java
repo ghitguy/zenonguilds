@@ -1,7 +1,7 @@
 package me.ghit.zenonguilds.commands.subcommands;
 
 import me.ghit.zenonguilds.commands.SubCommand;
-import me.ghit.zenonguilds.utils.GuildHandler;
+import me.ghit.zenonguilds.handlers.GuildHandler;
 import me.ghit.zenonguilds.utils.Messages;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;

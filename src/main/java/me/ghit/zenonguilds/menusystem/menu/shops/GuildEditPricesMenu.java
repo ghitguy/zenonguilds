@@ -2,11 +2,11 @@ package me.ghit.zenonguilds.menusystem.menu.shops;
 
 import dev.dbassett.skullcreator.SkullCreator;
 import me.ghit.zenonguilds.ZenonGuilds;
+import me.ghit.zenonguilds.handlers.GuildHandler;
 import me.ghit.zenonguilds.menusystem.Menu;
 import me.ghit.zenonguilds.menusystem.PlayerMenuUtility;
-import me.ghit.zenonguilds.utils.Chat;
-import me.ghit.zenonguilds.handlers.GuildHandler;
 import me.ghit.zenonguilds.serializers.ShopSerializer;
+import me.ghit.zenonguilds.utils.Chat;
 import me.ghit.zenonguilds.utils.TextUtils;
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -17,17 +17,17 @@ import org.bukkit.inventory.ItemStack;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class GuildSellMenu extends Menu {
+public class GuildEditPricesMenu extends Menu {
     private final FileConfiguration config = ZenonGuilds.getConfiguration().getConfig();
     private final ZenonGuilds plugin = ZenonGuilds.getInstance();
 
-    public GuildSellMenu(PlayerMenuUtility playerMenuUtility) {
+    public GuildEditPricesMenu(PlayerMenuUtility playerMenuUtility) {
         super(playerMenuUtility);
     }
 
     @Override
     public String getMenuName() {
-        return "Sell";
+        return "Edit Shop Prices";
     }
 
     @Override
@@ -93,7 +93,7 @@ public class GuildSellMenu extends Menu {
         // Get shop items
         for (String rawItem : config.getStringList("shop-items." + guild)) {
             ItemStack item = ShopSerializer.getItem(rawItem,
-                    Chat.toColor("&8Left click to sell " + new ItemStack(ShopSerializer.getMaterial(rawItem)).getMaxStackSize() + " items"),
+                    Chat.toColor("&8Left click to edit price"),
                     Chat.toColor("&7Value: &a" + ShopSerializer.getSellCost(rawItem)),
                     Chat.toColor("&7Stock: &d" + plugin.getStock(ShopSerializer.getMaterial(rawItem))));
             shopItems.add(item);

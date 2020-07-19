@@ -1,6 +1,6 @@
 package me.ghit.zenonguilds.utils;
 
-public class TextUtil {
+public class TextUtils {
 
     public static String convertToPascal(String raw) {
         if(raw == null || raw.isEmpty()) {

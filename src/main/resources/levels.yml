@@ -1,33 +1,166 @@
-user-levels:
-  1:
-    command: pex user %player% prefix "&atest "
-  2:
-    cost: 300
-    command: pex user %player% prefix "&1test "
-  3:
-    cost: 400
-    command: pex user %player% prefix "&2test "
-  4:
-    cost: 500
-    command: pex user %player% prefix "&3test "
-  5:
-    cost: 600
-    command: pex user %player% prefix "&4test "
-  6:
-    cost: 700
-    command: pex user %player% prefix "&5test "
-  7:
-    cost: 800
-    command: pex user %player% prefix "&6test "
-  8:
-    cost: 900
-    command: pex user %player% prefix "&7test "
-  9:
-    cost: 1000
-    command: pex user %player% prefix "&8test "
-  10:
-    cost: 1100
-    command: pex user %player% prefix "&9test "
+mining:
+  command: say Joined mining
+  leave-commands:
+    - "say test"
+    - "say secondline"
+  user-levels:
+    1:
+      command: say 1
+    2:
+      cost: 300
+      command: say 2
+    3:
+      cost: 400
+      command: say 3
+    4:
+      cost: 500
+      command: pex user %player% prefix "&3test "
+    5:
+      cost: 600
+      command: pex user %player% prefix "&4test "
+    6:
+      cost: 700
+      command: pex user %player% prefix "&5test "
+    7:
+      cost: 800
+      command: pex user %player% prefix "&6test "
+    8:
+      cost: 900
+      command: pex user %player% prefix "&7test "
+    9:
+      cost: 1000
+      command: pex user %player% prefix "&8test "
+    10:
+      cost: 1100
+      command: pex user %player% prefix "&9test "
+alchemy:
+  command: pex user %player% group set alchemy
+  user-levels:
+    1:
+      command: pex user %player% prefix "&atest "
+    2:
+      cost: 300
+      command: pex user %player% prefix "&1test "
+    3:
+      cost: 400
+      command: pex user %player% prefix "&2test "
+    4:
+      cost: 500
+      command: pex user %player% prefix "&3test "
+    5:
+      cost: 600
+      command: pex user %player% prefix "&4test "
+    6:
+      cost: 700
+      command: pex user %player% prefix "&5test "
+    7:
+      cost: 800
+      command: pex user %player% prefix "&6test "
+    8:
+      cost: 900
+      command: pex user %player% prefix "&7test "
+    9:
+      cost: 1000
+      command: pex user %player% prefix "&8test "
+    10:
+      cost: 1100
+      command: pex user %player% prefix "&9test "
+blacksmith:
+  command: pex user %player% group set blacksmith
+  user-levels:
+    1:
+      command: pex user %player% prefix "&atest "
+    2:
+      cost: 300
+      command: pex user %player% prefix "&1test "
+    3:
+      cost: 400
+      command: pex user %player% prefix "&2test "
+    4:
+      cost: 500
+      command: pex user %player% prefix "&3test "
+    5:
+      cost: 600
+      command: pex user %player% prefix "&4test "
+    6:
+      cost: 700
+      command: pex user %player% prefix "&5test "
+    7:
+      cost: 800
+      command: pex user %player% prefix "&6test "
+    8:
+      cost: 900
+      command: pex user %player% prefix "&7test "
+    9:
+      cost: 1000
+      command: pex user %player% prefix "&8test "
+    10:
+      cost: 1100
+      command: pex user %player% prefix "&9test "
+mercenary:
+  command: pex user %player% group set mercenary
+  user-levels:
+    1:
+      command: pex user %player% prefix "&atest "
+    2:
+      cost: 300
+      command: pex user %player% prefix "&1test "
+    3:
+      cost: 400
+      command: pex user %player% prefix "&2test "
+    4:
+      cost: 500
+      command: pex user %player% prefix "&3test "
+    5:
+      cost: 600
+      command: pex user %player% prefix "&4test "
+    6:
+      cost: 700
+      command: pex user %player% prefix "&5test "
+    7:
+      cost: 800
+      command: pex user %player% prefix "&6test "
+    8:
+      cost: 900
+      command: pex user %player% prefix "&7test "
+    9:
+      cost: 1000
+      command: pex user %player% prefix "&8test "
+    10:
+      cost: 1100
+      command: pex user %player% prefix "&9test "
+farming:
+  command: pex user %player% group set farming
+  user-levels:
+    1:
+      command: pex user %player% prefix "&atest "
+    2:
+      cost: 300
+      command: pex user %player% prefix "&1test "
+    3:
+      cost: 400
+      command: pex user %player% prefix "&2test "
+    4:
+      cost: 500
+      command: pex user %player% prefix "&3test "
+    5:
+      cost: 600
+      command: pex user %player% prefix "&4test "
+    6:
+      cost: 700
+      command: pex user %player% prefix "&5test "
+    7:
+      cost: 800
+      command: pex user %player% prefix "&6test "
+    8:
+      cost: 900
+      command: pex user %player% prefix "&7test "
+    9:
+      cost: 1000
+      command: pex user %player% prefix "&8test "
+    10:
+      cost: 1100
+      command: pex user %player% prefix "&9test "
 guild-levels:
   2: 3000
   3: 4000

@@ -5,7 +5,7 @@ import me.ghit.zenonguilds.ZenonGuilds;
 import me.ghit.zenonguilds.menusystem.Menu;
 import me.ghit.zenonguilds.menusystem.PlayerMenuUtility;
 import me.ghit.zenonguilds.utils.Chat;
-import me.ghit.zenonguilds.utils.GuildHandler;
+import me.ghit.zenonguilds.handlers.GuildHandler;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;

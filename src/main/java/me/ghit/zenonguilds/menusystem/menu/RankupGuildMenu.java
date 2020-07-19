@@ -5,7 +5,7 @@ import me.ghit.zenonguilds.ZenonGuilds;
 import me.ghit.zenonguilds.menusystem.Menu;
 import me.ghit.zenonguilds.menusystem.PlayerMenuUtility;
 import me.ghit.zenonguilds.utils.Chat;
-import me.ghit.zenonguilds.utils.GuildHandler;
+import me.ghit.zenonguilds.handlers.GuildHandler;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -16,6 +16,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class RankupGuildMenu extends Menu {
+    private final ZenonGuilds plugin = ZenonGuilds.getInstance();
+
     public RankupGuildMenu(PlayerMenuUtility playerMenuUtility) {
         super(playerMenuUtility);
     }
@@ -48,7 +50,7 @@ public class RankupGuildMenu extends Menu {
                 player.sendMessage(Chat.toColor("&cYou are not able to rank up to that level!"));
             } else { // Is the next level up
                 // money requirement
-                int requirement = ZenonGuilds.getLevelRequirements().getInt("guild-levels." + (currentLevel + 1));
+                int requirement = plugin.getLevelRequirements().getInt("guild-levels." + (currentLevel + 1));
 
                 if (ZenonGuilds.getEconomy().getBalance(player) >= requirement) {
                     // Has more than or equal to the right amount of money

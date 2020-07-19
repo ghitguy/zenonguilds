@@ -6,8 +6,8 @@ import me.ghit.zenonguilds.menusystem.Menu;
 import me.ghit.zenonguilds.menusystem.PlayerMenuUtility;
 import me.ghit.zenonguilds.menusystem.menu.shops.ShopPageMenu;
 import me.ghit.zenonguilds.utils.Chat;
-import me.ghit.zenonguilds.utils.GuildHandler;
-import me.ghit.zenonguilds.utils.TextUtil;
+import me.ghit.zenonguilds.handlers.GuildHandler;
+import me.ghit.zenonguilds.utils.TextUtils;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -21,7 +21,7 @@ public class GuildMenu extends Menu {
 
     @Override
     public String getMenuName() {
-        return TextUtil.convertToPascal(GuildHandler.getGuild(playerMenuUtility.getOwner())) + " Guild";
+        return TextUtils.convertToPascal(GuildHandler.getGuild(playerMenuUtility.getOwner())) + " Guild";
     }
 
     @Override

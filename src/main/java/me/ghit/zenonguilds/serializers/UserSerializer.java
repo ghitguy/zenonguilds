@@ -1,4 +1,4 @@
-package me.ghit.zenonguilds.utils;
+package me.ghit.zenonguilds.serializers;
 
 import org.bukkit.entity.Player;
 

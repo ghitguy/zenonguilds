@@ -2,9 +2,9 @@ package me.ghit.zenonguilds.commands.subcommands;
 
 import me.ghit.zenonguilds.commands.SubCommand;
 import me.ghit.zenonguilds.utils.Chat;
-import me.ghit.zenonguilds.utils.GuildHandler;
+import me.ghit.zenonguilds.handlers.GuildHandler;
 import me.ghit.zenonguilds.utils.Messages;
-import me.ghit.zenonguilds.utils.TextUtil;
+import me.ghit.zenonguilds.utils.TextUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
@@ -62,7 +62,7 @@ public class UserInfo extends SubCommand {
             player.sendMessage(Chat.toColor("&7 - &6&lLEADER"));
         }
 
-        player.sendMessage(Chat.toColor("&7 - Guild: " + TextUtil.convertToPascal(guild)));
+        player.sendMessage(Chat.toColor("&7 - Guild: " + TextUtils.convertToPascal(guild)));
         player.sendMessage(Chat.toColor("&7   - Level: " + GuildHandler.getGuildLevel(guild)));
         player.sendMessage(Chat.toColor("&7   - Balance: " + GuildHandler.getTotalBalance(guild)));
         player.sendMessage(Chat.toColor("&7   - Members: " + GuildHandler.getMembers(guild)));

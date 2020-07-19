@@ -1,8 +1,11 @@
-package me.ghit.zenonguilds.utils;
+package me.ghit.zenonguilds.handlers;
 
 import dev.dbassett.skullcreator.SkullCreator;
 import me.ghit.zenonguilds.ZenonGuilds;
 import me.ghit.zenonguilds.menusystem.Menu;
+import me.ghit.zenonguilds.utils.Chat;
+import me.ghit.zenonguilds.serializers.UserSerializer;
+import me.ghit.zenonguilds.utils.Levels;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.configuration.ConfigurationSection;
@@ -17,7 +20,9 @@ import java.util.UUID;
 
 public class GuildHandler {
 
-    private static FileConfiguration guilds = ZenonGuilds.getGuilds().getConfig();
+    private static final FileConfiguration guilds = ZenonGuilds.getGuilds().getConfig();
+    private static final ZenonGuilds plugin = ZenonGuilds.getInstance();
+    private static final ConfigurationSection guildSection = guilds.getConfigurationSection("guilds");
 
     public static List<String> getGuilds() {
         return Arrays.asList("mining", "alchemy", "blacksmith", "mercenary", "farming");
@@ -34,10 +39,11 @@ public class GuildHandler {
 
         guilds.set("guilds." + guild + ".members", members);
         ZenonGuilds.getGuilds().saveConfig();
+
+        Levels.setGuildRank(player);
     }
 
     public static String getGuild(Player player) {
-        ConfigurationSection guildSection = guilds.getConfigurationSection("guilds");
         String guild = "";
 
         for (String _guild : guildSection.getKeys(false)) {
@@ -49,7 +55,6 @@ public class GuildHandler {
     }
 
     public static String getGuild(OfflinePlayer player) {
-        ConfigurationSection guildSection = guilds.getConfigurationSection("guilds");
         String guild = "";
 
         for (String _guild : guildSection.getKeys(false)) {
@@ -61,6 +66,7 @@ public class GuildHandler {
     }
 
     public static void removeFromGuild(Player player) {
+        Levels.runLeaveCommands(player); // removes their ranks and stuff
         List<String> members = guilds.getStringList("guilds." + getGuild(player) + ".members");
         members.removeIf(member -> member.startsWith(player.getUniqueId().toString()));
         guilds.set("guilds." + getGuild(player) + ".members", members);
@@ -93,20 +99,8 @@ public class GuildHandler {
         return memberHeads;
     }
 
-    /*
-     * Get the total balance of a guild
-     */
     public static int getTotalBalance(String guild) {
-        int totalBalance = 0;
-
-        if (getMembers(guild).size() == 0) return totalBalance;
-
-        for (UUID member : getMembers(guild)) {
-            OfflinePlayer player = Bukkit.getOfflinePlayer(member);
-            totalBalance += ZenonGuilds.getEconomy().getBalance(player);
-        }
-
-        return totalBalance;
+        return plugin.getBalance(guild);
     }
 
     public static ArrayList<Player> getOnlineMembers(String guild) {
@@ -131,24 +125,12 @@ public class GuildHandler {
         ZenonGuilds.getGuilds().saveConfig();
     }
 
-    public static int getUserLevel(Player player) {
-        List<String> members = guilds.getStringList("guilds." + getGuild(player) + ".members");
-
-        for (int i = 0; i < members.size(); i++) {
-            if (members.get(i).startsWith(player.getUniqueId().toString())) {
-                return Integer.parseInt(UserSerializer.deserialize(members.get(i))[1]);
-            }
-        }
-
-        return -1;
-    }
-
     public static int getUserLevel(OfflinePlayer player) {
         List<String> members = guilds.getStringList("guilds." + getGuild(player) + ".members");
 
-        for (int i = 0; i < members.size(); i++) {
-            if (members.get(i).startsWith(player.getUniqueId().toString())) {
-                return Integer.parseInt(UserSerializer.deserialize(members.get(i))[1]);
+        for (String member : members) {
+            if (member.startsWith(player.getUniqueId().toString())) {
+                return Integer.parseInt(UserSerializer.deserialize(member)[1]);
             }
         }
 
@@ -171,8 +153,7 @@ public class GuildHandler {
             members.add(UserSerializer.serialize(player, level));
         }
 
-        Bukkit.dispatchCommand(Bukkit.getConsoleSender(), ZenonGuilds.getLevelRequirements().getString("user-levels." + level + ".command")
-                .replaceAll("%player%", player.getName()));
+        Levels.rankupGrantUser(player, level);
         System.out.println("[ZENONGUILDS] Player: " + player.getName() + " current up to " + level);
         guilds.set("guilds." + getGuild(player) + ".members", members);
         ZenonGuilds.getGuilds().saveConfig();

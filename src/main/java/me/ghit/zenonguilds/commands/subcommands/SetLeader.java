@@ -1,10 +1,8 @@
 package me.ghit.zenonguilds.commands.subcommands;
 
-import com.sun.org.apache.xpath.internal.operations.Bool;
 import me.ghit.zenonguilds.commands.SubCommand;
-import me.ghit.zenonguilds.utils.GuildHandler;
+import me.ghit.zenonguilds.handlers.GuildHandler;
 import me.ghit.zenonguilds.utils.Messages;
-import org.apache.commons.lang.BooleanUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 

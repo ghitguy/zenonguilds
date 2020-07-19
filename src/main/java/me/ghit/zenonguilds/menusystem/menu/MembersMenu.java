@@ -2,8 +2,8 @@ package me.ghit.zenonguilds.menusystem.menu;
 
 import me.ghit.zenonguilds.menusystem.PaginatedMenu;
 import me.ghit.zenonguilds.menusystem.PlayerMenuUtility;
-import me.ghit.zenonguilds.utils.GuildHandler;
-import me.ghit.zenonguilds.utils.TextUtil;
+import me.ghit.zenonguilds.handlers.GuildHandler;
+import me.ghit.zenonguilds.utils.TextUtils;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -21,7 +21,7 @@ public class MembersMenu extends PaginatedMenu {
 
     @Override
     public String getMenuName() {
-        return TextUtil.convertToPascal(GuildHandler.getGuild(playerMenuUtility.getOwner())) + " Guild Members";
+        return TextUtils.convertToPascal(GuildHandler.getGuild(playerMenuUtility.getOwner())) + " Guild Members";
     }
 
     @Override

@@ -5,7 +5,7 @@ import me.ghit.zenonguilds.ZenonGuilds;
 import me.ghit.zenonguilds.menusystem.Menu;
 import me.ghit.zenonguilds.menusystem.PlayerMenuUtility;
 import me.ghit.zenonguilds.utils.Chat;
-import me.ghit.zenonguilds.utils.GuildHandler;
+import me.ghit.zenonguilds.handlers.GuildHandler;
 import me.ghit.zenonguilds.utils.Messages;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -20,6 +20,7 @@ public class RankupUserMenu extends Menu {
     public RankupUserMenu(PlayerMenuUtility playerMenuUtility) {
         super(playerMenuUtility);
     }
+    private ZenonGuilds plugin = ZenonGuilds.getInstance();
 
     @Override
     public String getMenuName() {
@@ -48,8 +49,7 @@ public class RankupUserMenu extends Menu {
             if (levelClicked != currentLevel + 1) {
                 player.sendMessage(Chat.toColor("&cYou are not able to level up to that level!"));
             } else { // Is the next level up
-                // money requirement
-                int requirement = ZenonGuilds.getLevelRequirements().getInt("user-levels." + (currentLevel + 1) + ".cost");
+                int requirement = plugin.getLevelRequirements().getInt("user-levels." + (currentLevel + 1) + ".cost");
 
                 if ((currentLevel + 1) == 10) {
                     player.sendMessage(Messages.lockedLevel);
