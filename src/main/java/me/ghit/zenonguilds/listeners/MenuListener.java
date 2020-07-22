@@ -17,6 +17,7 @@ public class MenuListener implements Listener {
         // an InventoryHolder can be a Menu is because our Menu
         // class implements InventoryHolder!!
         if (holder instanceof Menu) {
+            // Horrible method of adding DragMenus
             event.setCancelled(true); //prevent them from fucking with the inventory
             if (event.getCurrentItem() == null) { //deal with null exceptions
                 return;
@@ -27,8 +28,5 @@ public class MenuListener implements Listener {
             //Call the handleMenu object which takes the event and processes it
             menu.handleMenu(event);
         }
-
-
     }
-
 }

@@ -20,12 +20,12 @@ import java.util.UUID;
 
 public class GuildHandler {
 
-    private static final FileConfiguration guilds = ZenonGuilds.getGuilds().getConfig();
     private static final ZenonGuilds plugin = ZenonGuilds.getInstance();
+    private static final FileConfiguration guilds = plugin.getGuilds().getConfig();
     private static final ConfigurationSection guildSection = guilds.getConfigurationSection("guilds");
 
     public static List<String> getGuilds() {
-        return Arrays.asList("mining", "alchemy", "blacksmith", "mercenary", "farming");
+        return Arrays.asList("test", "alchemy", "blacksmith", "mercenary", "farming");
     }
 
     public static void setGuild(Player player, String guild) {
@@ -38,7 +38,7 @@ public class GuildHandler {
         members.add(UserSerializer.serialize(player, 1));
 
         guilds.set("guilds." + guild + ".members", members);
-        ZenonGuilds.getGuilds().saveConfig();
+        plugin.getGuilds().saveConfig();
 
         Levels.setGuildRank(player);
     }
@@ -70,7 +70,7 @@ public class GuildHandler {
         List<String> members = guilds.getStringList("guilds." + getGuild(player) + ".members");
         members.removeIf(member -> member.startsWith(player.getUniqueId().toString()));
         guilds.set("guilds." + getGuild(player) + ".members", members);
-        ZenonGuilds.getGuilds().saveConfig();
+        plugin.getGuilds().saveConfig();
     }
 
     /*
@@ -122,7 +122,7 @@ public class GuildHandler {
         } else {
             guilds.set("guilds." + guild + ".level", level);
         }
-        ZenonGuilds.getGuilds().saveConfig();
+        plugin.getGuilds().saveConfig();
     }
 
     public static int getUserLevel(OfflinePlayer player) {
@@ -156,13 +156,13 @@ public class GuildHandler {
         Levels.rankupGrantUser(player, level);
         System.out.println("[ZENONGUILDS] Player: " + player.getName() + " current up to " + level);
         guilds.set("guilds." + getGuild(player) + ".members", members);
-        ZenonGuilds.getGuilds().saveConfig();
+        plugin.getGuilds().saveConfig();
     }
 
     public static void setLeader(Player player) {
         guilds.set("guilds." + getGuild(player) + ".leader", player.getUniqueId().toString());
         setUserLevel(player, 10);
-        ZenonGuilds.getGuilds().saveConfig();
+        plugin.getGuilds().saveConfig();
     }
 
     public static boolean isLeader(Player player) {
@@ -183,7 +183,7 @@ public class GuildHandler {
         if (!isLeader(player)) return;
         guilds.set("guilds." + getGuild(player) + ".leader", "");
         setUserLevel(player, 1);
-        ZenonGuilds.getGuilds().saveConfig();
+        plugin.getGuilds().saveConfig();
     }
 
     public static ArrayList<String> getMemberNames(String guild) {

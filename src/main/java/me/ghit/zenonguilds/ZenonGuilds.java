@@ -4,18 +4,16 @@ import me.ghit.zenonguilds.commands.CommandHandler;
 import me.ghit.zenonguilds.handlers.GuildHandler;
 import me.ghit.zenonguilds.listeners.MenuListener;
 import me.ghit.zenonguilds.menusystem.PlayerMenuUtility;
-import me.ghit.zenonguilds.serializers.ShopSerializer;
 import me.ghit.zenonguilds.utils.*;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;
-import org.bukkit.Material;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.nio.file.Path;
-import java.util.HashMap;
+import java.util.*;
 import java.util.logging.Logger;
 
 public final class ZenonGuilds extends JavaPlugin {
@@ -23,17 +21,17 @@ public final class ZenonGuilds extends JavaPlugin {
     private static final Logger log = Logger.getLogger("Minecraft");
     private static final HashMap<Player, PlayerMenuUtility> playerMenuUtilityMap = new HashMap<>();
 
-    private final Path stockDataPath = getDataFolder().toPath().resolve("stock.dat");
-    private final HashMap<Material, Integer> stock = Kryogenic.thaw(stockDataPath, HashMap::new);
+    private final Path shopDataPath = getDataFolder().toPath().resolve("shop-data.dat");
+    private final HashMap<String, String> shopData = Kryogenic.thaw(shopDataPath, HashMap::new);
 
-    private final Path guildBalanceDataPath = getDataFolder().toPath().resolve("guild_balances.dat");
+    private final Path guildBalanceDataPath = getDataFolder().toPath().resolve("guild-balances.dat");
     private final HashMap<String, Integer> guildBalances = Kryogenic.thaw(guildBalanceDataPath, HashMap::new);
 
-    private static Config guilds;
-    private static Config messages;
-    private static Config levels;
-    private static Config config;
-    private static Economy econ = null;
+    private Config guilds;
+    private Config messages;
+    private Config levels;
+    private Config shopItemsConfig;
+    private Economy econ = null;
 
     private static ZenonGuilds plugin;
 
@@ -53,17 +51,8 @@ public final class ZenonGuilds extends JavaPlugin {
         guilds = new Config(this, "guilds.yml");
         levels = new Config(this, "levels.yml");
         messages = new Config(this, "messages.yml");
-        config = new Config(this, "config.yml");
+        shopItemsConfig = new Config(this, "shop-items.yml");
         plugin = this;
-
-        // If stock is empty, add every material and 0 stock
-        if (stock.size() == 0) {
-             config.getConfig().getConfigurationSection("shop-items").getKeys(false).forEach(key -> {
-                 for (String raw : config.getConfig().getStringList("shop-items." + key)) {
-                     stock.put(ShopSerializer.getMaterial(raw), 0);
-                 }
-             });
-        }
 
         // If guild balances are empty, add every guild and $0
         if (guildBalances.size() == 0) {
@@ -76,7 +65,7 @@ public final class ZenonGuilds extends JavaPlugin {
 
     @Override
     public void onDisable() {
-        Kryogenic.freeze(stockDataPath, stock);
+        Kryogenic.freeze(shopDataPath, shopData);
         Kryogenic.freeze(guildBalanceDataPath, guildBalances);
     }
 
@@ -104,31 +93,20 @@ public final class ZenonGuilds extends JavaPlugin {
         return econ != null;
     }
 
-    public static Economy getEconomy() {
+    public Economy getEconomy() {
         return econ;
     }
     public static ZenonGuilds getInstance() {
         return plugin;
     }
-    public static Config getGuilds() {
+    public Config getGuilds() {
         return guilds;
     }
-    public static Config getConfiguration() {
-        return config;
-    }
-    public static FileConfiguration getMessages() {
+    public FileConfiguration getMessages() {
         return messages.getConfig();
     }
     public FileConfiguration getLevelRequirements() {
         return levels.getConfig();
-    }
-
-    public int getStock(Material material) {
-        return stock.get(material);
-    }
-
-    public void setStock(Material material, int number) {
-        stock.put(material, number);
     }
 
     public int getBalance(String guild) {

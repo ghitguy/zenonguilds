@@ -1,4 +1,4 @@
-mining:
+test:
   command: say Joined mining
   leave-commands:
     - "say test"

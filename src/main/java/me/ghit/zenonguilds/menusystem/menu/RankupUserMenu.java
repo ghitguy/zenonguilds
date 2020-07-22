@@ -49,16 +49,18 @@ public class RankupUserMenu extends Menu {
             if (levelClicked != currentLevel + 1) {
                 player.sendMessage(Chat.toColor("&cYou are not able to level up to that level!"));
             } else { // Is the next level up
-                int requirement = plugin.getLevelRequirements().getInt("user-levels." + (currentLevel + 1) + ".cost");
+                int requirement = plugin.getLevelRequirements().getInt(GuildHandler.getGuild(player) + ".user-levels." + (currentLevel + 1) + ".cost");
 
                 if ((currentLevel + 1) == 10) {
                     player.sendMessage(Messages.lockedLevel);
                     return;
                 }
 
-                if (ZenonGuilds.getEconomy().getBalance(player) >= requirement) {
+                if (plugin.getEconomy().getBalance(player) >= requirement) {
                     // Has more than or equal to the right amount of money
-                    ZenonGuilds.getEconomy().withdrawPlayer(player, requirement);
+                    System.out.println("RANKUP USER");
+
+                    plugin.getEconomy().withdrawPlayer(player, requirement);
 
                     currentLevel += 1;
                     GuildHandler.setUserLevel(player, currentLevel);

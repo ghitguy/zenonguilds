@@ -27,7 +27,7 @@ public class CommandHandler implements CommandExecutor, TabExecutor {
         subcommands.add(new UserInfo());
         subcommands.add(new GuildInfo());
         subcommands.add(new SetBalance());
-        subcommands.add(new ResetStock());
+//        subcommands.add(new ResetStock());
     }
 
     @Override

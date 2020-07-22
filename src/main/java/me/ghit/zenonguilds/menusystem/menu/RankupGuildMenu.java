@@ -52,9 +52,9 @@ public class RankupGuildMenu extends Menu {
                 // money requirement
                 int requirement = plugin.getLevelRequirements().getInt("guild-levels." + (currentLevel + 1));
 
-                if (ZenonGuilds.getEconomy().getBalance(player) >= requirement) {
+                if (plugin.getEconomy().getBalance(player) >= requirement) {
                     // Has more than or equal to the right amount of money
-                    ZenonGuilds.getEconomy().withdrawPlayer(player, -requirement);
+                    plugin.getEconomy().withdrawPlayer(player, -requirement);
 
                     currentLevel += 1;
                     GuildHandler.setGuildLevel(GuildHandler.getGuild(player), currentLevel);
